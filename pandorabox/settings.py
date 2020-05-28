@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-e37d3c53-7a9a-47ff-8608-12c4534e037b.ws-us02.gitpod.io',
-                'localhost',]
+                'localhost','fsl-pandorabox.herokuapp.com']
 
 
 # Application definition
