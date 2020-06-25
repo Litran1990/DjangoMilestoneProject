@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from products.models import Product
+from django.contrib import messages
 
 
 def cart_contents(request):
@@ -8,6 +9,7 @@ def cart_contents(request):
     every page
     """
     cart = request.session.get('cart', {})
+    print(cart)
 
     cart_items = []
     total = 0
