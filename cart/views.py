@@ -5,6 +5,9 @@ from django.contrib import messages
 
 def view_cart(request):
     """A View that renders the cart contents page"""
+    cart = request.session.get('cart', {})
+    if cart == {}:
+        messages.error(request, "There are no products in the shopping cart!")
     return render(request, "cart.html")
 
 
@@ -13,10 +16,6 @@ def add_to_cart(request, id):
     quantity = int(request.POST.get('quantity'))
 
     cart = request.session.get('cart', {})
-    if cart == {}:
-        messages.error(request, "There are no products in the shopping cart!")
-    return redirect('products')
-
     if id in cart:
         cart[id] = int(cart[id]) + quantity
     else:

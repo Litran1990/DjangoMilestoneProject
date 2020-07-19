@@ -1,5 +1,4 @@
-/* Base HTML
--------------------------------------------------- */
+/*-------------------- Index Page --------------------*/
 body {
     font-family: Arial;
     padding-top: 100px;
@@ -24,12 +23,6 @@ body {
   padding-bottom: 3rem;
   margin-bottom: 0;
   background-color: #fff;
-}
-@media (min-width: 768px) {
-  .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
 }
 
 .jumbotron p:last-child {
@@ -57,13 +50,39 @@ footer p {
 .badge-warning[href] {
     background-color: #c67605;
 }
-      
 
-/* RESPONSIVE CSS
--------------------------------------------------- */
 
+/*-------------------- Cart Page --------------------*/
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 3px;
+}
+   
+
+/*-------------------- RESPONSIVE CSS --------------------*/
+
+/*---------- Cart Page ----------*/
+@media (max-width: 572px) {
+  .cart-responsive {
+    text-align: center;
+    margin-bottom: 3px;
+  }
+}
+
+/*---------- Index Page ----------*/
 @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
       }
+
+@media (min-width: 768px) {
+  .jumbotron {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
