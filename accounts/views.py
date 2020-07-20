@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from accounts.forms import UserLoginForm, UserRegistrationForm
-
+from django.conf import settings
+from django.utils import timezone
+from accounts.forms import UserLoginForm
+from checkout.forms import MakePaymentForm, BillingForm, ShippingForm
 
 # Create your views here.
 def index(request):
@@ -28,7 +30,6 @@ def login(request):
         if login_form.is_valid():
             user = auth.authenticate(username=request.POST['username'],
                                     password=request.POST['password'])
-            
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully logged in!")
@@ -66,6 +67,26 @@ def registration(request):
         "registration_form": registration_form})
 
 def user_profile(request):
-    """The user's profile page"""
+    """The user's account details page"""
+
     user = User.objects.get(email=request.user.email)
+
     return render(request, 'profile.html', {"profile": user})
+
+def billing_info(request):
+    """The user's billing info page"""
+    if request.method == "POST":
+        billing_form = BillingForm(request.POST)
+        
+        if billing_form.is_valid():
+            billing_info = billing_form.save(commit=False)
+            billing_info.user = request.user
+            billing_info.date = timezone.now()
+            billing_info.save()
+        else:
+            return render(request, 'billing_info.html', {"billing_form": billing_form})
+
+    else:
+        billing_form = BillingForm()
+
+    return render(request, 'billing_info.html', {"billing_form": billing_form})

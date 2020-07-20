@@ -21,7 +21,7 @@ class MakePaymentForm(forms.Form):
     set_default_shipping = forms.BooleanField(required=False, label="Save as default shipping address")
 
 
-class OrderForm(forms.ModelForm):
+class BillingForm(forms.ModelForm):
 
     class Meta:
         model = Order

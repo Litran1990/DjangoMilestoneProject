@@ -43,9 +43,16 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
+            <form role="form" method="post" id="billing-form" action="{% url 'billing_info' %}">
                 <div class="row">
-                    <p>{{ profile.email }}</p>
+                    <div class="form-group col-md-6">
+                        <legend>Billing Details</legend>
+                        {{ billing_form | as_bootstrap }}
+                    </div>
+                    {% csrf_token %}
+                    <div class="form-group col-md-12">
+                        <input class=" btn btn-primary" id="submit_billing_btn" name="commit" type="submit" value="Submit Billing">
+                    </div>
                 </div>
             </form>
         </div>

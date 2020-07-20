@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import MakePaymentForm, OrderForm, ShippingForm
+from .forms import MakePaymentForm, BillingForm, ShippingForm
 from .models import OrderLineItem
 from django.conf import settings
 from django.utils import timezone
@@ -15,12 +15,13 @@ stripe.api_key = settings.STRIPE_SECRET
 @login_required()
 def checkout(request):
     if request.method == "POST":
-        order_form = OrderForm(request.POST)
+        billing_form = BillingForm(request.POST)
         shipping_form = ShippingForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
 
-        if order_form.is_valid() and shipping_form.is_valid() and payment_form.is_valid():
-            order = order_form.save(commit=False)
+        if billing_form.is_valid() and shipping_form.is_valid() and payment_form.is_valid():
+            order = billing_form.save(commit=False)
+            order.user = request.user
             order.date = timezone.now()
             order.save()
 
@@ -57,7 +58,7 @@ def checkout(request):
             messages.error(request, "We were unable to take a payment with that card!")
     else:
         payment_form = MakePaymentForm()
-        order_form = OrderForm()
+        billing_form = BillingForm()
         shipping_form = ShippingForm()
     
-    return render(request, "checkout.html", {"order_form": order_form, "shipping_form": shipping_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
+    return render(request, "checkout.html", {"billing_form": billing_form, "shipping_form": shipping_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
