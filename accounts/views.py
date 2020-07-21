@@ -1,11 +1,9 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.conf import settings
-from django.utils import timezone
-from accounts.forms import UserLoginForm
-from checkout.forms import MakePaymentForm, BillingForm, ShippingForm
+from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from .models import UserProfile
 
 # Create your views here.
 def index(request):
@@ -50,10 +48,9 @@ def registration(request):
 
         if registration_form.is_valid():
             registration_form.save()
-
             user = auth.authenticate(username=request.POST['username'],
-                                    password1=request.POST['password1'])
-
+                                    password=request.POST['password1'])
+            print(user)
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully registered")
@@ -62,31 +59,31 @@ def registration(request):
                 messages.error(request, "Unable to register your account at this time")
     else:
         registration_form = UserRegistrationForm()
-        
+
     return render(request, 'registration.html', {
         "registration_form": registration_form})
 
-def user_profile(request):
-    """The user's account details page"""
 
-    user = User.objects.get(email=request.user.email)
+def profile(request):
+    """A view to return the index page"""
 
-    return render(request, 'profile.html', {"profile": user})
+    profile = get_object_or_404(UserProfile, user=request.user)
 
-def billing_info(request):
-    """The user's billing info page"""
-    if request.method == "POST":
-        billing_form = BillingForm(request.POST)
-        
-        if billing_form.is_valid():
-            billing_info = billing_form.save(commit=False)
-            billing_info.user = request.user
-            billing_info.date = timezone.now()
-            billing_info.save()
-        else:
-            return render(request, 'billing_info.html', {"billing_form": billing_form})
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Profile successfully updated')
+            return redirect(reverse('profile'))
 
-    else:
-        billing_form = BillingForm()
+        messages.error(request, 'Failed to update profile. Make sure your form is valid')
+        return redirect(reverse('profile'))
 
-    return render(request, 'billing_info.html', {"billing_form": billing_form})
+    form = UserProfileForm(instance=profile)
+
+    template = 'profile.html'
+    context = {
+        'form': form
+    }
+
+    return render(request, template, context)

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from .models import Order
+from .models import UserProfile
 
 
 class UserLoginForm(forms.Form):
@@ -59,29 +59,37 @@ class UserRegistrationForm(UserCreationForm):
         expiry_year = forms.ChoiceField(label='Year', choices=YEAR_CHOICES, required=False)
 
         stripe_id = forms.CharField(widget=forms.HiddenInput)
+        
 
-        same_billing_address = forms.BooleanField(required=False, label="Billing address is the same as my shipping address")
-
-        set_default_shipping = forms.BooleanField(required=False, label="Save as default shipping address")
-
-
-class BillingForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
 
     class Meta:
-        model = Order
-        fields = (
-            'full_name', 'phone_number', 'country', 'postcode',
-            'town_or_city', 'street_address1', 'street_address2',
-            'county'
-        )
+        model = UserProfile
+        exclude = ('user',)
 
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'default_phone_number': 'Phone Number',
+            'default_country': 'Country',
+            'default_postcode': 'Postal Code',
+            'default_town_or_city': 'Town or City',
+            'default_street_address1': 'Street Address 1',
+            'default_street_address2': 'Street Address 2',
+            'default_county': 'County',
+        }
 
-class ShippingForm(forms.ModelForm):
-
-    class Meta:
-        model = Order
-        fields = (
-            'full_name', 'phone_number', 'country', 'postcode',
-            'town_or_city', 'street_address1', 'street_address2',
-            'county'
-        )
+        for field in self.fields:
+            if field == 'default_phone_number':
+                self.fields[field].widget.attrs['autofocus'] = True
+            if self.fields[field].required:
+                placeholder = f'{placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'border-black rounded-0'
+            self.fields[field].label = False
