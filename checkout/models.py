@@ -3,7 +3,8 @@ from products.models import Product
 
 # Create your models here.
 class Order(models.Model):
-    full_name = models.CharField(max_length=50, blank=False)
+    first_name = models.CharField(max_length=20, blank=True)
+    last_name = models.CharField(max_length=20, blank=True)
     phone_number = models.CharField(max_length=20, blank=False)
     country = models.CharField(max_length=40, blank=False)
     postcode = models.CharField(max_length=20, blank=True)

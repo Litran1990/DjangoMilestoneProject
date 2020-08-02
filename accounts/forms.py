@@ -4,8 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from .models import UserProfile, UserPayment
 
-
-"""Login Information"""
+# Login Information
 class UserLoginForm(forms.Form):
     """Form to be used to log users in"""
 
@@ -13,7 +12,7 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-"""Registration Information"""
+# Registration Information
 class UserRegistrationForm(UserCreationForm):
     """Form used to register a new user"""
 
@@ -48,7 +47,7 @@ class UserRegistrationForm(UserCreationForm):
         return password2
 
 
-"""Profile Information"""
+# Profile Information
 class UserProfileForm(forms.ModelForm):
 
     class Meta:
@@ -85,8 +84,8 @@ class UserProfileForm(forms.ModelForm):
             self.fields[field].label = False
 
 
-"""Credit Card Information"""
-class UserPayment(forms.ModelForm):
+# Credit Card Information
+class UserPaymentForm(forms.ModelForm):
 
     class Meta:
         model = UserPayment
@@ -99,14 +98,14 @@ class UserPayment(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
-            'dafault_credit_card_number': 'Credit card number',
+            'default_credit_card_number': 'Credit card number',
             'default_cvv': 'Security code (CVV)',
             'default_expiry_month': 'Month',
             'default_expiry_year': 'Year',
         }
 
         for field in self.fields:
-            if field == 'dafault_credit_card_number':
+            if field == 'default_credit_card_number':
                 self.fields[field].widget.attrs['autofocus'] = True
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'

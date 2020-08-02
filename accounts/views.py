@@ -2,11 +2,10 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm, UserPayment
+from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm, UserPaymentForm
 from .models import UserProfile, UserPayment
 
-# Create your views here.
-
+# Index Page
 """Index Page"""
 def index(request):
     """Return the index.html file"""
@@ -20,7 +19,7 @@ def logout(request):
     return redirect(reverse('index'))
 
 
-"""Login Page"""
+# Login Page
 def login(request):
     """Log the user in"""
     if request.user.is_authenticated:
@@ -42,7 +41,7 @@ def login(request):
     return render(request, 'login.html', {"login_form": login_form})
 
 
-"""Registration Page"""
+# Registration Page
 def registration(request):
     """Render the registration page"""
     if request.user.is_authenticated:
@@ -69,7 +68,7 @@ def registration(request):
         "registration_form": registration_form})
 
 
-"""Profile Page"""
+# Profile Page
 def profile(request):
     """A view to return the profile page"""
 
@@ -95,14 +94,14 @@ def profile(request):
     return render(request, template, context)
 
 
-"""Credit Card Info Page"""
+# Credit Card Info Page
 def payment(request):
     """A view to return the credit card info page"""
 
     payment = get_object_or_404(UserPayment, user=request.user)
 
     if request.method == 'POST':
-        payment_form = UserPayment(request.POST, instance=payment)
+        payment_form = UserPaymentForm(request.POST, instance=payment)
         if payment_form.is_valid():
             payment_form.save()
             messages.success(request, f'Credit card information successfully updated')
@@ -111,7 +110,7 @@ def payment(request):
         messages.error(request, 'Failed to credit card information. Make sure your form is valid')
         return redirect(reverse('payment'))
 
-    payment_form = UserPayment(instance=payment)
+    payment_form = UserPaymentForm(instance=payment)
 
     template = 'payment.html'
     context = {

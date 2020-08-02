@@ -6,6 +6,8 @@ from .models import OrderLineItem
 from django.conf import settings
 from django.utils import timezone
 from products.models import Product
+from accounts.forms import UserProfileForm, UserPaymentForm
+from accounts.models import UserProfile, UserPayment
 import stripe
 
 # Create your views here.
@@ -57,8 +59,14 @@ def checkout(request):
             print(payment_form.errors)
             messages.error(request, "We were unable to take a payment with that card!")
     else:
-        payment_form = MakePaymentForm()
-        billing_form = BillingForm()
-        shipping_form = ShippingForm()
+        profile = get_object_or_404(UserProfile, user=request.user)
+        payment = get_object_or_404(UserPayment, user=request.user)
+
+        # payment_form = MakePaymentForm()
+        payment_form = UserPaymentForm(instance=payment)
+        # billing_form = BillingForm()
+        billing_form = UserProfileForm(instance=profile)
+        # shipping_form = ShippingForm()
+        shipping_form = UserProfileForm(instance=profile)
     
     return render(request, "checkout.html", {"billing_form": billing_form, "shipping_form": shipping_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})

@@ -42,41 +42,8 @@ class UserProfileAdmin(admin.ModelAdmin):
 
     def last_name(self, instance):
         """Get the user's last name from the User model"""
-        
+
         return instance.user.last_name
-
-
-# # User Credit Card Info
-# class UserPaymentInline(admin.StackedInline):
-#     """Inline for editing UserPayment within User model in admin"""
-
-#     model = UserPayment
-#     can_delete = False
-
-
-# class UserUserPaymentAdmin(admin.ModelAdmin):
-#     """UserPayment editing outside base UserAdmin"""
-
-#     list_display = (
-#         'user',
-#         'first_name',
-#         'last_name',
-#         'dafault_credit_card_number',
-#         'default_cvv',
-#         'default_expiry_month',
-#         'default_expiry_year',
-#     )
-
-#     def first_name(self, instance):
-#         """Get the user's first name from the User model"""
-
-#         return instance.user.first_name
-
-
-#     def last_name(self, instance):
-#         """Get the user's last name from the User model"""
-        
-#         return instance.user.last_name
 
 
 # Unregister the default UserAdmin and register our custom ones
