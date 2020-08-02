@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm
-from .models import UserProfile
+from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm, UserPayment
+from .models import UserProfile, UserPayment
 
 # Create your views here.
+
+"""Index Page"""
 def index(request):
     """Return the index.html file"""
     return render(request, 'index.html')
@@ -18,6 +20,7 @@ def logout(request):
     return redirect(reverse('index'))
 
 
+"""Login Page"""
 def login(request):
     """Log the user in"""
     if request.user.is_authenticated:
@@ -38,6 +41,8 @@ def login(request):
         login_form = UserLoginForm()
     return render(request, 'login.html', {"login_form": login_form})
 
+
+"""Registration Page"""
 def registration(request):
     """Render the registration page"""
     if request.user.is_authenticated:
@@ -64,8 +69,9 @@ def registration(request):
         "registration_form": registration_form})
 
 
+"""Profile Page"""
 def profile(request):
-    """A view to return the index page"""
+    """A view to return the profile page"""
 
     profile = get_object_or_404(UserProfile, user=request.user)
 
@@ -84,6 +90,32 @@ def profile(request):
     template = 'profile.html'
     context = {
         'form': form
+    }
+
+    return render(request, template, context)
+
+
+"""Credit Card Info Page"""
+def payment(request):
+    """A view to return the credit card info page"""
+
+    payment = get_object_or_404(UserPayment, user=request.user)
+
+    if request.method == 'POST':
+        payment_form = UserPayment(request.POST, instance=payment)
+        if payment_form.is_valid():
+            payment_form.save()
+            messages.success(request, f'Credit card information successfully updated')
+            return redirect(reverse('payment'))
+
+        messages.error(request, 'Failed to credit card information. Make sure your form is valid')
+        return redirect(reverse('payment'))
+
+    payment_form = UserPayment(instance=payment)
+
+    template = 'payment.html'
+    context = {
+        'payment_form': payment_form
     }
 
     return render(request, template, context)

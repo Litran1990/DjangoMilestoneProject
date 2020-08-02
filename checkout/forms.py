@@ -16,10 +16,6 @@ class MakePaymentForm(forms.Form):
 
     stripe_id = forms.CharField(widget=forms.HiddenInput)
 
-    same_billing_address = forms.BooleanField(required=False, label="Billing address is the same as my shipping address")
-
-    set_default_shipping = forms.BooleanField(required=False, label="Save as default shipping address")
-
 
 class BillingForm(forms.ModelForm):
 

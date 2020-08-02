@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from accounts.views import logout, login, registration, profile
+from accounts.views import logout, login, registration, profile, payment
 from accounts import url_reset
 
 
@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^login/', login, name="login"),
     url(r'^register/', registration, name="register"),
     url(r'^profile', profile, name="profile"),
+    url(r'^payment', profile, name="payment"),
     url(r'^password-reset/', include(url_reset)
     )
 ]
