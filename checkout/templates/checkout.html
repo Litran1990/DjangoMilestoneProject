@@ -13,6 +13,15 @@
 {% endblock head_js %}
 
 {% block content %}
+{% if messages %}
+<div class="alert alert-success">
+    <div class="messages">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
 
     <div class="row">       

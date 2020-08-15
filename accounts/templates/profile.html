@@ -3,11 +3,26 @@
 {% load static from staticfiles %}
 {% load bootstrap_tags %}
 
+{% block page_title %}Edit Profile{% endblock %}
+
+{% block page_heading %}Edit Profile{% endblock %}
+
 {% block content %}
 {% include 'account.html' %}
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
 <div class="overlay"></div>
 <div class="container">
+    {% if messages %}
+    <div class="row">
+        <div class="alert alert-success">
+            <div class="messages">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
 	<div class="row">
 		<div class="col">
 			<hr>

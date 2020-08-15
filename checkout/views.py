@@ -62,8 +62,8 @@ def checkout(request):
         profile = get_object_or_404(UserProfile, user=request.user)
         payment = get_object_or_404(UserPayment, user=request.user)
 
-        # payment_form = MakePaymentForm()
-        payment_form = UserPaymentForm(instance=payment)
+        payment_form = MakePaymentForm()
+        # payment_form = UserPaymentForm(instance=payment)
         # billing_form = BillingForm()
         billing_form = UserProfileForm(instance=profile)
         # shipping_form = ShippingForm()

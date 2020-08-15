@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import UserLoginForm, UserRegistrationForm, UserProfileForm, UserPaymentForm
+from .forms import UserLoginForm, UserRegistrationForm, \
+    UserProfileForm, UserPaymentForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from .models import UserProfile, UserPayment
 
 # Index Page
@@ -78,10 +81,11 @@ def profile(request):
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Profile successfully updated')
+            messages.success(request, "Profile successfully updated")
             return redirect(reverse('profile'))
 
-        messages.error(request, 'Failed to update profile. Make sure your form is valid')
+        messages.error(request, 'Failed to update profile. \
+            Make sure your form is valid')
         return redirect(reverse('profile'))
 
     form = UserProfileForm(instance=profile)
@@ -104,10 +108,12 @@ def payment(request):
         payment_form = UserPaymentForm(request.POST, instance=payment)
         if payment_form.is_valid():
             payment_form.save()
-            messages.success(request, f'Credit card information successfully updated')
+            messages.success(request, f'Credit card information \
+                successfully updated')
             return redirect(reverse('payment'))
 
-        messages.error(request, 'Failed to credit card information. Make sure your form is valid')
+        messages.error(request, 'Failed to credit card information. \
+            Make sure your form is valid')
         return redirect(reverse('payment'))
 
     payment_form = UserPaymentForm(instance=payment)
@@ -118,3 +124,21 @@ def payment(request):
     }
 
     return render(request, template, context)
+
+
+# Update Password
+def change_password(request):
+    """ A view used to update the user's password """
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('password_reset_done')
+        else:
+            return redirect('password_reset')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        return render(request, 'registration/password_reset_form.html', {'form': form})
