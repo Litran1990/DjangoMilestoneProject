@@ -84,8 +84,8 @@ def profile(request):
             messages.success(request, "Profile successfully updated")
             return redirect(reverse('profile'))
 
-        messages.error(request, 'Failed to update profile. \
-            Make sure your form is valid')
+        messages.error(request, "Failed to update profile. \
+            Make sure your form is valid")
         return redirect(reverse('profile'))
 
     form = UserProfileForm(instance=profile)
@@ -108,12 +108,12 @@ def fan(request):
         fan_form = UserFootballForm(request.POST, instance=fan)
         if fan_form.is_valid():
             fan_form.save()
-            messages.success(request, f'Fan information \
-                successfully updated')
+            messages.success(request, "Fan information \
+                successfully updated")
             return redirect(reverse('fan'))
 
-        messages.error(request, 'Failed to update fan information. \
-            Make sure your form is valid')
+        messages.error(request, "Failed to update fan information. \
+            Make sure your form is valid")
         return redirect(reverse('fan'))
 
     fan_form = UserFootballForm(instance=fan)
