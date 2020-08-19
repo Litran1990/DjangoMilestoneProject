@@ -10,32 +10,24 @@
 </div>
 {% endif %}
 <section class="jumbotron text-center">
-    <!-- User can complete his profile in order to provide his football preferences -->
     <div class="container">
-        <h1>Didn't find your favorite shirt?</h1>
-        <p class="lead text-muted">Register and let us know your favorite shirts, clubs and players and we have them available for 
+        <h1>The Football Museum</h1>
+        <p class="lead text-muted">You’re here because we share the same passion for the greatest invention of mankind. If 70s, 80s, 90s and early 00s football/soccer is totally your vibe, you have come to the right place.</p>
+        <p>
         {% if user.is_authenticated %}
-        <a class="btn btn-link" href="{% url 'fan' %}">you</a>!
+        <a class="btn btn-primary my-2" href="{% url 'profile' %}">My Account</a>
+        <a class="btn btn-primary my-2" href="{% url 'products' %}">All Shirts</a>
         {%  else %}
-        <a class="btn btn-link" href="{% url 'register' %}">you</a>!
+        <a class="btn btn-primary my-2" href="{% url 'register' %}">Register</a>
+        <a class="btn btn-secondary my-2" href="{% url 'login' %}">Log In</a>
         {% endif %}
         </p>
     </div>
-    <!-- User can search for a particular shirt -->
-    <div class="container">
-      <div class="row search-bar-margin-bottom text-center">
-         <div class="search-bar-container display">
-            <form class="search-bar" action="{% url 'search' %}" method="GET">
-               <input class="search-bar" type="text" name="q" />
-               <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-         </div>
-      </div>
-   </div>
 </section>
-<!-- Search results if search bar has been used -->
+
 <div class="album py-5 bg-light">
     <div class="container">
+    
         <div class="row">
             {% for product in products %}
             <div class="col-md-4">
@@ -64,3 +56,4 @@
     </div>
 </div>
 {% endblock %}
+

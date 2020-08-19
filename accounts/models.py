@@ -21,13 +21,20 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-# Create Credit Card Information
-class UserPayment(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    default_credit_card_number = models.CharField(max_length=20, null=True, blank=True)
-    default_cvv = models.CharField(max_length=20, null=True, blank=True)
-    default_expiry_month = models.CharField(max_length=40, null=True, blank=True)
-    default_expiry_year = models.CharField(max_length=20, null=True, blank=True)
+# Football Fan Information
+SIZE_CHOICES = (
+    ('Small','S'),
+    ('Medium', 'M'),
+    ('Large','L'),
+    ('Extra Large','XL'),
+    )
+
+class UserFootball(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    club = models.CharField(max_length=20, null=True, blank=True)
+    favorite_player = models.CharField(max_length=200, null=True, blank=True)
+    favorite_shirts = models.CharField(max_length=200, null=True, blank=True)
+    size = models.CharField(max_length=12, choices=SIZE_CHOICES, blank=True, default='Medium')
 
     def __str__(self):
         return self.user.username
@@ -44,9 +51,9 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     instance.userprofile.save()
 
     """
-    Create a user payment for all new users
+    Create a user fan profile for all new users
     """
     if created:
-        UserPayment.objects.create(user=instance)
-    # Existing users: just save the user payment info
-    instance.userpayment.save()
+        UserFootball.objects.create(user=instance)
+    # Existing users: just save the user fan info
+    instance.userfootball.save()

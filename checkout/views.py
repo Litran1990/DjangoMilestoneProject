@@ -6,8 +6,8 @@ from .models import OrderLineItem
 from django.conf import settings
 from django.utils import timezone
 from products.models import Product
-from accounts.forms import UserProfileForm, UserPaymentForm
-from accounts.models import UserProfile, UserPayment
+from accounts.forms import UserProfileForm, UserFootballForm
+from accounts.models import UserProfile, UserFootball
 import stripe
 
 # Create your views here.
@@ -18,10 +18,10 @@ stripe.api_key = settings.STRIPE_SECRET
 def checkout(request):
     if request.method == "POST":
         billing_form = BillingForm(request.POST)
-        shipping_form = ShippingForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
+        shipping_form = UserProfileForm(request.POST)
 
-        if billing_form.is_valid() and shipping_form.is_valid() and payment_form.is_valid():
+        if  payment_form.is_valid() and billing_form.is_valid() and shipping_form.is_valid():
             order = billing_form.save(commit=False)
             order.user = request.user
             order.date = timezone.now()
@@ -60,13 +60,9 @@ def checkout(request):
             messages.error(request, "We were unable to take a payment with that card!")
     else:
         profile = get_object_or_404(UserProfile, user=request.user)
-        payment = get_object_or_404(UserPayment, user=request.user)
 
         payment_form = MakePaymentForm()
-        # payment_form = UserPaymentForm(instance=payment)
-        # billing_form = BillingForm()
-        billing_form = UserProfileForm(instance=profile)
-        # shipping_form = ShippingForm()
+        billing_form = BillingForm()
         shipping_form = UserProfileForm(instance=profile)
-    
+
     return render(request, "checkout.html", {"billing_form": billing_form, "shipping_form": shipping_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})

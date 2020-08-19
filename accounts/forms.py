@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from .models import UserProfile, UserPayment
+from .models import UserProfile, UserFootball
 
 # Login Information
 class UserLoginForm(forms.Form):
@@ -84,11 +84,11 @@ class UserProfileForm(forms.ModelForm):
             self.fields[field].label = False
 
 
-# Credit Card Information
-class UserPaymentForm(forms.ModelForm):
+# Football Fan Information
+class UserFootballForm(forms.ModelForm):
 
     class Meta:
-        model = UserPayment
+        model = UserFootball
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
@@ -98,14 +98,14 @@ class UserPaymentForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
-            'default_credit_card_number': 'Credit card number',
-            'default_cvv': 'Security code (CVV)',
-            'default_expiry_month': 'Month',
-            'default_expiry_year': 'Year',
+            'club': 'Football Club',
+            'favorite_player': 'Football Idol',
+            'favorite_shirts': 'Favorite Shirts',
+            'size': 'Shirt Size',
         }
 
         for field in self.fields:
-            if field == 'default_credit_card_number':
+            if field == 'club':
                 self.fields[field].widget.attrs['autofocus'] = True
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'

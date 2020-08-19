@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from products.models import Product
 
 # Create your views here.
 
 def index(request):
     """A view that display the index page"""
-    return render(request, "index.hml")
+    index = Product.objects.all()
+    return render(request, "index.hml", {"index": index})

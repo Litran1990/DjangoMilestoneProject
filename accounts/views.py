@@ -3,10 +3,10 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import UserLoginForm, UserRegistrationForm, \
-    UserProfileForm, UserPaymentForm
+    UserProfileForm, UserFootballForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from .models import UserProfile, UserPayment
+from .models import UserProfile, UserFootball
 
 # Index Page
 """Index Page"""
@@ -98,29 +98,29 @@ def profile(request):
     return render(request, template, context)
 
 
-# Credit Card Info Page
-def payment(request):
-    """A view to return the credit card info page"""
+# Fan Page
+def fan(request):
+    """A view to return the user football fan info page"""
 
-    payment = get_object_or_404(UserPayment, user=request.user)
+    fan = get_object_or_404(UserFootball, user=request.user)
 
     if request.method == 'POST':
-        payment_form = UserPaymentForm(request.POST, instance=payment)
-        if payment_form.is_valid():
-            payment_form.save()
-            messages.success(request, f'Credit card information \
+        fan_form = UserFootballForm(request.POST, instance=fan)
+        if fan_form.is_valid():
+            fan_form.save()
+            messages.success(request, f'Fan information \
                 successfully updated')
-            return redirect(reverse('payment'))
+            return redirect(reverse('fan'))
 
-        messages.error(request, 'Failed to credit card information. \
+        messages.error(request, 'Failed to update fan information. \
             Make sure your form is valid')
-        return redirect(reverse('payment'))
+        return redirect(reverse('fan'))
 
-    payment_form = UserPaymentForm(instance=payment)
+    fan_form = UserFootballForm(instance=fan)
 
-    template = 'payment.html'
+    template = 'fan.html'
     context = {
-        'payment_form': payment_form
+        'fan_form': fan_form
     }
 
     return render(request, template, context)
