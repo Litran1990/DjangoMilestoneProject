@@ -65,6 +65,16 @@ footer p {
 }
 
 /*-------------------- Product --------------------*/
+#product-section {
+    padding-bottom: 3rem;
+}
+
+#preferences-link {
+    color: #2DBD24;
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .shadow-sm {
     box-shadow: 0 .125rem .25rem #2DBD24!important;
 }
@@ -99,6 +109,36 @@ footer p {
     text-align: center;
 }
 
+.search-bar-container {
+  width: 100%;
+}
+
+.search-bar-margin-bottom {
+  margin-bottom: 10px;
+}
+
+form.search-bar input[type="text"] {
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 15px;
+    border: 1px solid #28A745;
+    width: 85%;
+}
+
+form.search-bar button {
+    width: 7%;
+    padding: 7px;
+    background: #28A745;
+    color: white;
+    font-size: 15px;
+    border-radius: 15%;
+    border: none;
+}
+
+form.search-bar button:hover {
+  background: #2DBD24;
+}
+
 /*-------------------- Cart Page --------------------*/
 .cart-button {
     color: #fff;
@@ -109,7 +149,19 @@ footer p {
     margin-bottom: 3px;
 }
 
-/*-------------------- Profile Page --------------------*/
+/*-------------------- My Account Page --------------------*/
+.profile-container {
+    margin-bottom: 50px;
+}
+
+#sidebarMenu {
+    z-index: auto;
+}
+
+#profile-list {
+    margin-top: 15px;
+}
+
 .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;

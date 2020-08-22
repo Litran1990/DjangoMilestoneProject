@@ -9,15 +9,15 @@
     </div>
 </div>
 {% endif %}
-<section class="jumbotron text-center">
+<section id="product-section" class="jumbotron text-center">
     <!-- User can complete his profile in order to provide his football preferences -->
     <div class="container">
         <h1>Didn't find your favorite shirt?</h1>
-        <p class="lead text-muted">Register and let us know your favorite shirts, clubs and players and we have them available for 
+        <p class="lead text-muted">Register and let us know your favorite shirts, clubs and players and we will have them available for 
         {% if user.is_authenticated %}
-        <a class="btn btn-link" href="{% url 'fan' %}">you</a>!
+        <a id="preferences-link" href="{% url 'fan' %}">you</a>!
         {%  else %}
-        <a class="btn btn-link" href="{% url 'register' %}">you</a>!
+        <a id="preferences-link" href="{% url 'register' %}">you</a>!
         {% endif %}
         </p>
     </div>
@@ -49,11 +49,11 @@
                             {% csrf_token %}
                             <div class="btn-group">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-sm btn-outline-secondary" type="submit">Add to Cart</button>
+                                    <button class="btn btn-primary my-2" type="submit">Add to Cart</button>
                                 </span>
                             </div>
                         </form>
-                        <small class="text-muted">{{ product.price }}</small>
+                        <small class="text-muted">£{{ product.price }}</small>
                     </div>
                 </div>
             </div>
