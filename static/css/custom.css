@@ -1,7 +1,20 @@
+/*-------------------- Navbar Page --------------------*/
+.website-logo {
+  padding-right: 10px;  
+  width: auto;
+  height: 40px;
+}
+
 /*-------------------- Index Page --------------------*/
 body {
     font-family: Arial;
     padding-top: 100px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #28A745;
+    border-color: #28A745;
 }
 
 .product {
@@ -19,10 +32,10 @@ body {
 }
 
 .jumbotron {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  margin-bottom: 0;
-  background-color: #fff;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    margin-bottom: 0;
+    background-color: #fff;
 }
 
 .jumbotron p:last-child {
@@ -51,11 +64,46 @@ footer p {
     background-color: #c67605;
 }
 
+/*-------------------- Product --------------------*/
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem #2DBD24!important;
+}
+
+.bg-light {
+    background-color: #fff!important;
+}
+
+.small, small {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#recently-added {
+    color: #2DBD24;
+    font-size: 2rem;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-bottom: 20px;
+}
+
+.card-title {
+    color: #212529;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.card-text {
+    color: #212529;
+    font-size: 16px;
+    text-align: center;
+}
+
 /*-------------------- Cart Page --------------------*/
 .cart-button {
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #28A745;
+    border-color: #28A745;
     font-size: 16px;
     text-align: center;
     margin-bottom: 3px;
@@ -114,7 +162,7 @@ footer p {
 }
 
 .sidebar .nav-link.active {
-  color: #007bff;
+  color: #28A745;
 }
 
 .sidebar .nav-link:hover .feather,
@@ -129,16 +177,18 @@ footer p {
 
 /*------------Footer------------*/
 #page-footer {
-    background-color: #404040;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 30px;
-    padding-top: 30px;
-    margin: 30px 0px 0px 0px;
+    background-color: #212529;
+    position: absolute;
+    width: 100%;
 }
 
 #page-footer .row {
     margin: 0px;
+}
+
+footer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 #footer-logo p {
@@ -156,17 +206,10 @@ footer p {
     padding-top: 5px;
 }
 
-#footer-list {
-    display: flex;
-    margin: 0px;
-    float: right;
-}
-
 .footer-icon {
-    padding-left: 15px;
     font-size: 24px;
     font-weight: 400;
-    color: #fff;
+    color: #28A745;
 }
 
 

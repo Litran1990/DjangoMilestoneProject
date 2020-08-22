@@ -12,14 +12,11 @@ def view_cart(request):
 
 
 def add_to_cart(request, id):
-    """Add a quantity of the specified product to the cart"""
-    quantity = int(request.POST.get('quantity'))
+    """Add the selected product to the cart"""
 
     cart = request.session.get('cart', {})
-    if id in cart:
-        cart[id] = int(cart[id]) + quantity
-    else:
-        cart[id] = cart.get(id, quantity)
+    cart[id] = cart.get(id, 1)
+
     request.session['cart'] = cart
     return redirect(reverse('index'))
 

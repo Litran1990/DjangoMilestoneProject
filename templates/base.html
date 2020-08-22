@@ -25,7 +25,7 @@
     <!-- Fixed masthead -->
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="{% url 'index' %}">The Football Museum</a>
+            <a class="navbar-brand" href="{% url 'index' %}"><img class="website-logo" src="{% static 'img/logo.jpg' %}" alt="">The Football Museum</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -60,20 +60,19 @@
         {% block content %}{% endblock %}
     </div>
     <footer id="page-footer">
-        <div class="row">
-            <div id="footer-logo" class="col l4 m4 s4">
-                <p>The Football Museum</p>
+        <div class="row text-center">
+            <div class="col l4 m4 s4">
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a class="footer-icon" href="https://www.linkedin.com/in/felipe-spoliante-litran/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                    <li class="list-inline-item"><a class="footer-icon" href="mailto:felipelitran@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                    <li class="list-inline-item"><a class="footer-icon" href="https://github.com/Litran1990" target="_blank"><i class="fa fa-github"></i></a></li>
+                    <li class="list-inline-item"><a class="footer-icon" href="https://twitter.com/FelipeLitran" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                </ul>
             </div>
+        </div>
+        <div class="row text-center">
             <div id="footer-copyright" class="col l4 m4 s4">
                 <p>© 2020 The Football Museum</p>
-            </div>
-            <div class="col l4 m4 s4">
-                <ul id="footer-list">
-                    <li class="footer-icon"><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/felipe-spoliante-litran/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                    <li class="footer-icon"><a class="grey-text text-lighten-3" href="mailto:felipelitran@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a></li>
-                    <li class="footer-icon"><a class="grey-text text-lighten-3" href="https://github.com/Litran1990" target="_blank"><i class="fab fa-github"></i></a></li>
-                    <li class="footer-icon"><a class="grey-text text-lighten-3" href="https://twitter.com/FelipeLitran" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                </ul>
             </div>
         </div>
     </footer>
