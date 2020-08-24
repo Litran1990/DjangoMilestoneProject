@@ -30,7 +30,6 @@
         <td>{{ item.product.name }}</td>
         <td>£{{ item.product.price }}</td>
         <td>{{item.quantity}}</td>
-        <td>£{{ total }}</td>
         <td>
             <form class="form-inline" method="post" action="{% url 'adjust_cart' item.id %}">
                 {% csrf_token %}

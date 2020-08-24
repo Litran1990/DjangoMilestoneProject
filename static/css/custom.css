@@ -5,15 +5,42 @@
   height: 40px;
 }
 
+.navbar-dark .navbar-nav .active > .nav-link:hover {
+  color: #28A745;
+}
+
+.fa-user {
+    padding-right: 5px;
+}
+
+.fa-sign-out {
+padding-right: 3px;
+}
+
 /*-------------------- Index Page --------------------*/
 body {
     font-family: Arial;
     padding-top: 100px;
+    height: 100%;
+    margin: 0px;
+}
+
+#content {
+    min-height: 100vh; /* will cover the 100% of viewport */
+    overflow: hidden;
+    display: block;
+    position: relative;
 }
 
 .btn-primary {
     color: #fff;
     background-color: #28A745;
+    border-color: #28A745;
+}
+
+.btn-primary:hover {
+    color: #28A745;
+    background-color: #fff;
     border-color: #28A745;
 }
 
@@ -48,15 +75,6 @@ body {
 
 .jumbotron .container {
   max-width: 40rem;
-}
-
-footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-footer p {
-  margin-bottom: .25rem;
 }
 
 .label-warning[href],
@@ -149,32 +167,26 @@ form.search-bar button:hover {
     margin-bottom: 3px;
 }
 
-/*-------------------- My Account Page --------------------*/
-.profile-container {
-    margin-bottom: 50px;
+.cart-button:hover {
+    color: #28A745;
+    background-color: #fff;
+    border-color: #28A745;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 3px;
 }
 
+/*-------------------- My Account Page --------------------*/
 #sidebarMenu {
     z-index: auto;
 }
 
+.sidebar .nav-link:hover {
+  color: #28A745;
+}
+
 #profile-list {
     margin-top: 15px;
-}
-
-.bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-}
-
-.feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
 }
 
 .sidebar {
@@ -208,20 +220,6 @@ form.search-bar button:hover {
   color: #333;
 }
 
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
-}
-
-.sidebar .nav-link.active {
-  color: #28A745;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
-}
-
 .sidebar-heading {
   font-size: .75rem;
   text-transform: uppercase;
@@ -232,15 +230,16 @@ form.search-bar button:hover {
     background-color: #212529;
     position: absolute;
     width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 #page-footer .row {
     margin: 0px;
 }
 
-footer {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+.footer p {
+  margin-bottom: .25rem;
 }
 
 #footer-logo p {

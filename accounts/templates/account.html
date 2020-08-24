@@ -4,28 +4,25 @@
 <div class="container-fluid">
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-        <div class="sidebar-sticky pt-3">
-            <ul id="profile-list" class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="{% url 'profile' %}">
-                <span data-feather="home"></span>
-                Account Details <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'fan' %}">
-                <span data-feather="file"></span>
-                Fan Information
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'change_password' %}">
-                <span data-feather="users"></span>
-                Password Update
-                </a>
-            </li>
-            </ul>
-        </div>
+            <div class="sidebar-sticky pt-3">
+                <ul id="profile-list" class="nav flex-column" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}" aria-selected="true">
+                        Account Details <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'fan' %}" aria-selected="false">
+                        Fan Information
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'change_password' %}" aria-selected="false">
+                        Password Update
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </nav>
         {% block content %}
         {% endblock %}

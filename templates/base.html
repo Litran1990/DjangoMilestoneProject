@@ -33,15 +33,15 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a class="nav-link" href="{% url 'products' %}">All Shirts</a></li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item active"><a class="nav-link" href="{% url 'profile' %}">My Account</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">Log Out</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'profile' %}"><i class="fa fa-user"></i>My Account</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>Log Out</a></li>
                     {%  else %}
                     <li class="nav-item active"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
                     <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">Log In</a></li>
                     {% endif %}
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'view_cart' %}">
-                            <i class="fa fa-shipping-cart"></i> Cart
+                            <i class="fa fa-shopping-cart"></i> Cart
                             {% if product_count > 0 %}
                             <label class="badge badge-warning">{{ product_count }}</label>
                             {% endif %}
@@ -56,15 +56,15 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div id="content" class="container">
         {% block content %}{% endblock %}
     </div>
-    <footer id="page-footer">
+    <footer id="page-footer" class="container-fluid">
         <div class="row text-center">
             <div class="col l4 m4 s4">
                 <ul class="list-inline">
                     <li class="list-inline-item"><a class="footer-icon" href="https://www.linkedin.com/in/felipe-spoliante-litran/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                    <li class="list-inline-item"><a class="footer-icon" href="mailto:felipelitran@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                    <li class="list-inline-item"><a class="footer-icon" href="{% url 'contact' %}" target="_blank"><i class="fa fa-envelope"></i></a></li>
                     <li class="list-inline-item"><a class="footer-icon" href="https://github.com/Litran1990" target="_blank"><i class="fa fa-github"></i></a></li>
                     <li class="list-inline-item"><a class="footer-icon" href="https://twitter.com/FelipeLitran" target="_blank"><i class="fa fa-twitter"></i></a></li>
                 </ul>
