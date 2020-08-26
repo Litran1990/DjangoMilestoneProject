@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% block page_title %}Checkout{% endblock %}
+
 {% load static from staticfiles %}
 {% load bootstrap_tags %}
 
@@ -22,33 +25,33 @@
     </div>
 </div>
 {% endif %}
+<!-- Checkout Form -->
 <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
-
+    <!-- Shipping Address -->
     <div class="row">       
         <div class="form-group col-md-12">
             <legend>Shipping Details</legend>
             {{ shipping_form | as_bootstrap }}
         </div>
     </div>
-
     <div class="row">
+        <!-- Error Messages -->
         <div id="credit-card-errors" style="display: none;">
             <div class="alert-message block-message error" id="stripe-error-message"></div>
         </div>
-
+        <!-- Billing Info -->
         <div class="form-group col-md-6">
             <legend>Billing Details</legend>
             {{ billing_form | as_bootstrap }}
         </div>
-
+        <!-- Credit Card Info -->
         <div class="form-group col-md-6">
             <legend>Credit Card Details</legend>
             {{ payment_form | as_bootstrap }}
         </div>
-
         {% csrf_token %}
         <div class="form-group col-md-12">
-            <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
+            <input class="btn btn-primary" name="commit" type="submit" value="Submit Payment">
         </div>
     </div>
 </form>

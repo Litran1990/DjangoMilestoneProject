@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% block page_title %}The Football Museum{% endblock %}
 {% block content %}
 {% if messages %}
+<!-- Alert Messages -->
 <div class="alert alert-success">
     <div class="messages">
         {% for message in messages %}
@@ -9,6 +11,7 @@
     </div>
 </div>
 {% endif %}
+<!-- Home Content -->
 <section class="jumbotron text-center">
     <div class="container">
         <h1>The Football Museum</h1>
@@ -19,20 +22,20 @@
         <a class="btn btn-primary my-2" href="{% url 'products' %}">All Shirts</a>
         {%  else %}
         <a class="btn btn-primary my-2" href="{% url 'register' %}">Register</a>
-        <a class="btn btn-secondary my-2" href="{% url 'login' %}">Log In</a>
+        <a class="btn btn-primary my-2" href="{% url 'login' %}">Log In</a>
         {% endif %}
         </p>
     </div>
 </section>
 
+<!-- Recently Added -->
 <div class="album py-5 bg-light">
     <h2 id="recently-added">Recently Added:</h2>
-    <div class="container">
-    
+    <div class="container">   
         <div class="row">
             {% for product in products|slice:":3"%}
             <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
+            <div id="home-card" class="card mb-4 shadow-sm">
                 <div class="product" width="100%" height="225" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
                 <div class="card-body">
                     <p class="card-title" >{{ product.name }}</p>
@@ -42,11 +45,11 @@
                             {% csrf_token %}
                             <div class="btn-group">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary my-2" type="submit">Add to Cart</button>
+                                    <button id="home-card-button" class="btn btn-primary my-2" type="submit">Add to Cart</button>
                                 </span>
                             </div>
                         </form>
-                        <small class="text-muted">£{{ product.price }}</small>
+                        <small id="home-price" class="text-muted">£{{ product.price }}</small>
                     </div>
                 </div>
             </div>

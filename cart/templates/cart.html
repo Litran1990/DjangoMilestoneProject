@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
+
+{% block page_title %}Shopping Cart{% endblock %}
+
 {% load static from staticfiles %}
 {% load bootstrap_tags %}
 
 {% block content %}
 {% if messages %}
+<!-- Alert Messages -->
 <div class="alert alert-success">
     <div class="messages">
         {% for message in messages %}
@@ -12,15 +16,16 @@
     </div>
 </div>
 {% endif %}
+<!-- Cart Items -->
 <div class="table-responsive">
     <table class="table">
     <h4>Order Summary</h4>
     <thead>
         <tr class="table-active">
         <th scope="col">Product</th>
-        <th scope="col">Unit Price</th>
+        <th scope="col">Price</th>
         <th scope="col">Quantity</th>
-        <th scope="col">Total Price</th>
+        <th id="cart-total" scope="col">Total</th>
         <th scope="col"></th>
         </tr>
     </thead>

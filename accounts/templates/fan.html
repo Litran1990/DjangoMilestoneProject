@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block page_title %}Fan Information{% endblock %}
+
 {% load static from staticfiles %}
 {% load bootstrap_tags %}
 
@@ -32,7 +34,7 @@
                 <label for="fan">Please let us know you favorite club, players, shirts and shirt size:</label><br><br>
 				{% csrf_token %}
 				{{ fan_form | as_bootstrap }}
-				<button class="cart-button btn btn-primary float-right ml-2 cart-responsive" type="submit">Update Information</button>
+				<button class="cart-button btn btn-primary float-left ml-2 cart-responsive" type="submit">Update Information</button>
 			</form>
 		</div>
 	</div>
