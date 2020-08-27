@@ -1,12 +1,11 @@
 [![Build Status](https://travis-ci.org/Litran1990/DjangoMilestoneProject.svg?branch=master)](https://travis-ci.org/Litran1990/DjangoMilestoneProject)
 
-# Felipe Spoliante Litran Portfolio - Oui Chef!
+# Felipe Spoliante Litran Portfolio - The Football Museum
+
+![home](https://user-images.githubusercontent.com/45206652/91416594-e4636100-e84f-11ea-905c-86d78507ef97.PNG)
 
 ## About
-
-<img src="{% static 'img/home.png' %}">
-
-This [application](https://fsl-pandorabox.herokuapp.com/) (app) consists of a website where users can find recipes from the best cuisines in the world with a step-by-step decription on how make them at home.
+You’re [here](https://fsl-pandorabox.herokuapp.com/) because we share the same passion for the greatest invention of mankind. If 70s, 80s, 90s and early 00s football/soccer is totally your vibe, you have come to the right place!
 
 #### Functionality
 The application consists of 4 main sections providing the user with the possibility of:

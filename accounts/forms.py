@@ -76,7 +76,7 @@ class UserProfileForm(forms.ModelForm):
             if field == 'default_phone_number':
                 self.fields[field].widget.attrs['autofocus'] = True
             if self.fields[field].required:
-                placeholder = '{placeholders[field]} *'
+                placeholder = {placeholders[field]}
             else:
                 placeholder = placeholders[field]
             self.fields[field].widget.attrs['placeholder'] = placeholder
@@ -108,7 +108,7 @@ class UserFootballForm(forms.ModelForm):
             if field == 'club':
                 self.fields[field].widget.attrs['autofocus'] = True
             if self.fields[field].required:
-                placeholder = f'{placeholders[field]} *'
+                placeholder = {placeholders[field]}
             else:
                 placeholder = placeholders[field]
             self.fields[field].widget.attrs['placeholder'] = placeholder
